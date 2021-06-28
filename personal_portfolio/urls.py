@@ -14,12 +14,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf.urls import url, include
+from django.conf import settings
+from django.urls import path, include
+from django.conf.urls.static import static
+from .routers import router
+from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
-    url(r'^', include('users.urls')),
-    url(r'^admin/', admin.site.urls),
-    url(r'', include('hello_world.urls')),
-    url(r'^projects/', include('projects.urls')),
-    url(r'^blog/', include('blog.urls')),
+    path('users/', include('users.urls')),
+    path('admin', RedirectView.as_view(url = 'admin/')),
+    path('admin/', admin.site.urls),
+    path('projects', RedirectView.as_view(url = 'projects/')),
+    path('projects/', include('projects.urls')),
+    path('blog', RedirectView.as_view(url = 'blog/')),
+    path('blog/', include('blog.urls')),
+    path('api', RedirectView.as_view(url = 'api/')),
+    path('api/', include(router.urls)),
+    path('filemanager', RedirectView.as_view(url = 'filemanager/')),
+    path('filemanager/', TemplateView.as_view(template_name='index.html'),  name='Home'),
+    path('', include('hello_world.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
+    )
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
+    
+    

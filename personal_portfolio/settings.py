@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_DIR = "/media"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -27,7 +29,6 @@ SECRET_KEY = 'django-insecure-($amb4hsa0s0+(khwwax4p6qiz*kei#e5zs&%t_bz0809!r(_o
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -43,6 +44,9 @@ INSTALLED_APPS = [
     'hello_world',
     'projects',
     'blog',
+    'webpack_loader',
+    'filemanager',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +64,7 @@ ROOT_URLCONF = 'personal_portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": ["personal_portfolio/templates/"],
+        "DIRS": ["personal_portfolio/templates/", BASE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,3 +152,30 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_GITHUB_KEY = os.getenv("SOCIAL_AUTH_GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_SECRET = os.getenv("SOCIAL_AUTH_GITHUB_SECRET")
+
+# settings for django-webpack-loader
+STATIC_ROOT = os.path.join(BASE_DIR, 'public')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'dist'),
+)
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': '',
+        'STATS_FILE': BASE_DIR / 'webpack-stats.json',
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\\.hot-update.js', '.+\\.map']
+    }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        # 'rest_framework.parsers.FileUploadParser',
+        'rest_framework.parsers.MultiPartParser',
+
+    )
+}
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240 # higher than the count of fields
+# CORS_ALLOW_HEADERS = ('X-CSRFTOKEN')
