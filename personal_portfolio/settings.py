@@ -156,7 +156,7 @@ SOCIAL_AUTH_GITHUB_SECRET = os.getenv("SOCIAL_AUTH_GITHUB_SECRET")
 # settings for django-webpack-loader
 STATIC_ROOT = os.path.join(BASE_DIR, 'public')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'dist'),
+    os.path.join(BASE_DIR, 'filemanager-frontend/dist'),
 )
 WEBPACK_LOADER = {
     'DEFAULT': {

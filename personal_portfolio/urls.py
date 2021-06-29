@@ -22,15 +22,10 @@ from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
     path('users/', include('users.urls')),
-    path('admin', RedirectView.as_view(url = 'admin/')),
     path('admin/', admin.site.urls),
-    path('projects', RedirectView.as_view(url = 'projects/')),
     path('projects/', include('projects.urls')),
-    path('blog', RedirectView.as_view(url = 'blog/')),
     path('blog/', include('blog.urls')),
-    path('api', RedirectView.as_view(url = 'api/')),
     path('api/', include(router.urls)),
-    path('filemanager', RedirectView.as_view(url = 'filemanager/')),
     path('filemanager/', TemplateView.as_view(template_name='index.html'),  name='Home'),
     path('', include('hello_world.urls')),
 ]
