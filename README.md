@@ -3,27 +3,27 @@ I will use this as a base for a personal website adding my hobby projects.
 Currently only containing templates for a blog and project porfolio.
 
 ## Create python venv
-´´´
+```
 $ python3 -m venv pyvenv
 $ source pyvenv/bin/activate
 $ pip install -r requirements.txt 
-´´´
+```
 
 ## Start the server
 
-´´´
+```
 $ python manage.py migrate
 $ python manage.py runserver
-´´´
+```
 
 ## Create an admin user
-´´´
+```
 $ python manage.py createsuperuser  
-´´´
+```
 
 ## Adding projects sites
 
-´´´
+```
 $ python
 >>> from projects.models import Project
 >>> p1 = Project(
@@ -34,7 +34,7 @@ $ python
 ... )
 >>> p1.save()
 >>> exit()
-´´´
+```
 ## URLs
 
 This is assuming the server is running on localhost:8000
