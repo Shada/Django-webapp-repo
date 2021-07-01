@@ -18,7 +18,6 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 from .routers import router
-from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
     path('users/', include('users.urls')),
@@ -26,7 +25,6 @@ urlpatterns = [
     path('projects/', include('projects.urls')),
     path('blog/', include('blog.urls')),
     path('api/', include(router.urls)),
-    path('filemanager/', TemplateView.as_view(template_name='index.html'),  name='Home'),
     path('', include('hello_world.urls')),
 ]
 

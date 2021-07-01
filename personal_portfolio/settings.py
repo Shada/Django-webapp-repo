@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'hello_world',
     'projects',
     'blog',
-    'webpack_loader',
     'filemanager',
     'rest_framework',
 ]
@@ -64,7 +63,7 @@ ROOT_URLCONF = 'personal_portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": ["personal_portfolio/templates/", BASE_DIR],
+        "DIRS": ["personal_portfolio/templates/", BASE_DIR/'filemanager-frontend'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,22 +151,6 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_GITHUB_KEY = os.getenv("SOCIAL_AUTH_GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_SECRET = os.getenv("SOCIAL_AUTH_GITHUB_SECRET")
-
-# settings for django-webpack-loader
-STATIC_ROOT = os.path.join(BASE_DIR, 'public')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'filemanager-frontend/dist'),
-)
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': '',
-        'STATS_FILE': BASE_DIR / 'webpack-stats.json',
-        'POLL_INTERVAL': 0.1,
-        'TIMEOUT': None,
-        'IGNORE': ['.+\\.hot-update.js', '.+\\.map']
-    }
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
